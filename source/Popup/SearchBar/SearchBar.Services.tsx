@@ -6,7 +6,6 @@ const fetchAnimeData = (
   searchQuery: string,
   setAnimeData: React.Dispatch<React.SetStateAction<AnimeData[]>>,
 ) => {
-  console.log(`search fetch: ${searchQuery}`);
   fetch(
     `https://api.myanimelist.net/v2/anime?q=${encodeURIComponent(searchQuery)}&limit=${SEARCH_LIMIT}`,
     {

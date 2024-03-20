@@ -28,4 +28,11 @@ interface IAnimeDetails {
   rating: string;
 }
 
-export default IAnimeDetails;
+enum AnimeStatus {
+  Finished = "finished_airing",
+  Ongoing = "currently_airing",
+}
+
+export { AnimeStatus };
+export type { IAnimeDetails };
+

@@ -1,5 +1,5 @@
 import { Notifications, browser } from "webextension-polyfill-ts";
-import IAnimeDetails from "../../Models/AnimeDetails";
+import { IAnimeDetails } from "../../Models/AnimeDetails";
 
 const fetchAndSetAnimeDetails = async (
   animeId: number | string,
@@ -59,7 +59,7 @@ const convertToCurrentTime = (dayOfWeek: string, time: string) => {
   return targetDate;
 }
 
-const createAlarm = (targetDate: Date, animeId: number) => {
+const createAlarm = async (targetDate: Date, animeId: number) => {
   // Get the day and time components from the target date
   const targetDay = targetDate.getDay(); // Day of the week (0 = Sunday, 1 = Monday, ..., 6 = Saturday)
   const targetHours = targetDate.getHours(); // Hours (0-23)
@@ -82,7 +82,6 @@ const createAlarm = (targetDate: Date, animeId: number) => {
     when: when, // Schedule the alarm to run after the calculated time
     periodInMinutes: 7 * 24 * 60 // Set the period to 7 days (1 week)
   });
-
   const notificationOptions: Notifications.CreateNotificationOptions = {
     type: 'basic',
     title: 'Alert Created!',

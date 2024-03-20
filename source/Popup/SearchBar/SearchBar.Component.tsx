@@ -14,7 +14,6 @@ const SearchBar: React.FC<SearchBarProps> = ({ openModal }) => {
   const [animeData, setAnimeData] = useState<AnimeData[]>([]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
     setQuery(e.target.value);
     handleSearch(e.target.value);
   };
@@ -32,7 +31,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ openModal }) => {
     <section id="searchbar">
       {/* Logo Section */}
       <div className="flex justify-center mb-2">
-        <img src="your-logo.png" alt="Logo" className="w-16 h-16" />
+        <img src="../assets/animeschedule.png" alt="Logo" className="w-34 h-16" />
         {/* Adjust width and height based on your logo size */}
       </div>
 

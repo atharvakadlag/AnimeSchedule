@@ -23,7 +23,6 @@ function Main() {
       {/* Wide Div */}
       <div className="bg-gray-100 p-8 rounded-lg shadow-lg w-[560px]">
         <SearchBar openModal={openModal} />
-        <AnimeDetails animeId={30230} />
         <ReactModal
         isOpen={isOpen}
         onRequestClose={closeModal}

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import IAnimeDetails from "../../Models/AnimeDetails";
+import { AnimeStatus, IAnimeDetails } from "../../Models/AnimeDetails";
 import {convertToCurrentTime, createAlarm, fetchAndSetAnimeDetails} from "./AnimeDetails.Services";
 import {
   DateRangeOutlined,
@@ -55,11 +55,15 @@ const AnimeDetails: React.FC<AnimeDetailsProps> = ({ animeId }) => {
         </div>
       </div>
       <button 
-      className="mb-2 border-2 px-1 rounded flex items-center w-36"
+      className={"rounded border border-gray-400 bg-white px-2 py-1 font-semibold text-gray-800 shadow hover:bg-gray-100 " + (animeDetails.status == AnimeStatus.Finished ? "opacity-50 cursor-not-allowed" : "")}
       onClick={(_) => createAlarm(targetDate, animeId)}
+      disabled={animeDetails.status == AnimeStatus.Finished}
+      title={animeDetails.status == AnimeStatus.Finished ? "All episodes released. Cannot enable notification" : "Enable notification for weekly episode release"}
       >
-        <NotificationsOutlined/>
-        Enable Notification
+        <div className="flex items-center">
+          <span><NotificationsOutlined/></span>
+          <span>Enable Notification</span>
+        </div>
       </button>
       <div className="flex ">
         <div>

@@ -1,6 +1,6 @@
 import { Notifications, browser } from "webextension-polyfill-ts";
 import { fetchAnimeDetails } from "../Popup/AnimeDetails/AnimeDetails.Services";
-import IAnimeDetails from "../Models/AnimeDetails";
+import { AnimeStatus, IAnimeDetails } from "../Models/AnimeDetails";
 
 browser.runtime.onInstalled.addListener((): void => {
   console.log("🦄", "extension installed");
@@ -12,8 +12,15 @@ browser.alarms.onAlarm.addListener(async (alarm) => {
 
     console.log(`recieved alarm for: "${animeId}"`)
     const data: IAnimeDetails = await fetchAnimeDetails(animeId);
-    console.log(data);
 
+    switch (data.status) {
+      case AnimeStatus.Finished:
+        console.log(`Clearing alarm for ${alarm.name}`);
+        browser.alarms.clear(alarm.name);
+        return;
+      case AnimeStatus.Ongoing:
+        break;
+    }
     // Show the notification
     const notificationOptions: Notifications.CreateNotificationOptions = {
       type: 'basic',
